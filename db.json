@@ -1,0 +1,102 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "name": "Manav",
+      "email": "manav10799@example.com",
+      "friends": [
+        "u2",
+        "u3"
+      ]
+    },
+    {
+      "id": "u2",
+      "name": "Anchal",
+      "email": "anchal@example.com",
+      "friends": [
+        "u1",
+        "u3"
+      ]
+    },
+    {
+      "id": "u3",
+      "name": "Drishti",
+      "email": "drishti@example.com",
+      "friends": [
+        "u1",
+        "u2"
+      ]
+    },
+    {
+      "id": "u4",
+      "name": "Manu",
+      "email": "manu.kumar@example.com",
+      "friends": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g1",
+      "name": "Office Friends",
+      "members": [
+        "u1",
+        "u2"
+      ]
+    },
+    {
+      "id": "g2",
+      "name": "Travel Buddies",
+      "members": [
+        "u1",
+        "u3"
+      ]
+    },
+    {
+      "id": "g3",
+      "name": "Movie Club",
+      "members": [
+        "u2",
+        "u3"
+      ]
+    }
+  ],
+  "expenses": [
+    {
+      "id": "e1",
+      "description": "Dinner at Italian Bistro",
+      "amount": 2400,
+      "paidBy": "u1",
+      "splitBetween": [
+        "u1",
+        "u2",
+        "u3"
+      ],
+      "group": "g1",
+      "createdAt": "2025-03-12T12:00:00Z"
+    },
+    {
+      "id": "e2",
+      "description": "Movie Tickets",
+      "amount": 1500,
+      "paidBy": "u2",
+      "splitBetween": [
+        "u2",
+        "u3"
+      ],
+      "group": "g3",
+      "createdAt": "2025-03-11T18:30:00Z"
+    },
+    {
+      "id": "e3",
+      "description": "Cab Ride",
+      "amount": 800,
+      "paidBy": "u3",
+      "splitBetween": [
+        "u1",
+        "u3"
+      ],
+      "group": "g2",
+      "createdAt": "2025-03-10T09:15:00Z"
+    }
+  ]
+}
