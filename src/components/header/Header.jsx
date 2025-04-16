@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import axios from "axios";
-import "./Header.css";
 import themeContext from "../../theme/themeContext";
 import Dropdown from '@mui/joy/Dropdown';
 import Menu from '@mui/joy/Menu';

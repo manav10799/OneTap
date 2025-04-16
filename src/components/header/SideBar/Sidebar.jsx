@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import "./SideBar.css";
 import List from "@mui/joy/List";
 import ListItemButton from "@mui/joy/ListItemButton";
 import { Link } from "react-router-dom";
