@@ -11,7 +11,7 @@ export default function Header({user, setUser}) {
 
   const handleLogout = () => {
     axios
-      .get("https://backend-five-bay-57.vercel.app/auth/logout", { withCredentials: true })
+      .get(import.meta.env.VITE_BACKEND_URL + "/auth/logout", { withCredentials: true })
       .then(() => {
         setUser(null);
         window.location.href = "/login";

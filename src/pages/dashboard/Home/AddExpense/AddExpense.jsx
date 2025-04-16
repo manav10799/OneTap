@@ -17,7 +17,7 @@ export default function AddExpenseModal({
   currentLog
 }) {
   const [timeOffValue, setTimeOffValue] = React.useState("M");
-  const apiUrl = "https://backend-five-bay-57.vercel.app/logs";
+  const apiUrl = import.meta.env.VITE_BACKEND_URL + "/logs";
 
   const addLog = async () => {
     const now = new Date();

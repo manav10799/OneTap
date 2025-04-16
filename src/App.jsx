@@ -12,7 +12,7 @@ function App() {
   const [user, setUser] = useState(null);
   useEffect(() => {
     axios
-      .get("https://backend-five-bay-57.vercel.app/auth/user", { withCredentials: true }) 
+      .get(import.meta.env.VITE_BACKEND_URL + "/auth/user", { withCredentials: true }) 
       .then((response) => {
         if (response.data) setUser(response.data);
       })
