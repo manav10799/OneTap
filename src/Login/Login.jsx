@@ -1,11 +1,11 @@
 import { Typography } from "@mui/joy";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
 
 export default function Login({user}) {
 
   const handleLogin = () => {
-    window.location.href = "http://localhost:3001/auth/google";
+    window.location.href = "https://backend-five-bay-57.vercel.app/auth/google";
   };
 
   if (user) {

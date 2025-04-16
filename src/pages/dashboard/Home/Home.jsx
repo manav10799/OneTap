@@ -14,7 +14,7 @@ export default function Home() {
   const [filteredLogs, setFilteredLogs] = useState([]);
   const [availableMonths, setAvailableMonths] = useState([]);
   const loggedInUser = useContext(UserContext);
-  const apiUrl = "http://localhost:3001/logs";
+  const apiUrl = "https://backend-five-bay-57.vercel.app/logs";
   const [openAddExpenseModal, setopenAddExpenseModal] = useState(false);
 
   const fetchLogs = useCallback(async () => {
