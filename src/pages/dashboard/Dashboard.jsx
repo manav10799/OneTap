@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "../../components/header/SideBar/sidebar";
+import SideBar from "../../components/header/SideBar/Sidebar";
 import Home from "./Home/Home";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import RecentActivity from "./RecentActivity/RecentActivity";
