@@ -11,16 +11,24 @@ import UserContext from './service/UserContext';
 function App() {
   const [user, setUser] = useState(null);
   useEffect(() => {
-    axios
-      .get(import.meta.env.VITE_BACKEND_URL + "/auth/user", { withCredentials: true }) 
-      .then((response) => {
-        if (response.data) setUser(response.data);
-      })
-      .catch((err) => {
-        setUser(null);
-        console.error(err);
-      });
+    const fetchUser = () => {
+      axios
+        .get(import.meta.env.VITE_BACKEND_URL + "/auth/user", { withCredentials: true })
+        .then((response) => {
+          if (response.data) setUser(response.data);
+        })
+        .catch((err) => {
+          setUser(null);
+          console.error(err);
+        });
+    };
+  
+    // Only call after short delay so cookie has time to sync
+    const timeout = setTimeout(fetchUser, 500); // 500ms delay
+  
+    return () => clearTimeout(timeout); // cleanup
   }, []);
+  
 
   return (
     <div className="App h-screen">
