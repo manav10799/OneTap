@@ -21,6 +21,7 @@ function App() {
         console.error(err);
       });
   }, []);
+
   return (
     <div className="App h-screen">
       <UserContext.Provider value={{user}}>
