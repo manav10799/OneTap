@@ -9,16 +9,6 @@ import MenuItem from '@mui/joy/MenuItem';
 export default function Header({user, setUser}) {
   const { theme, toggleTheme } = useContext(themeContext);
 
-  const handleLogout = () => {
-    axios
-      .get(import.meta.env.VITE_BACKEND_URL + "/auth/logout", { withCredentials: true })
-      .then(() => {
-        setUser(null);
-        window.location.href = "/login";
-      })
-      .catch((err)=> console.log(err));
-  };
-
   return (
     <div className="header flex items-center justify-between pl-[36px] pr-[36px] dark:bg-neutral-900 h-[50px] w-screen border-b-2 border-neutral-200 dark:border-neutral-800">
       <div className="logo h-[50px] flex items-center">

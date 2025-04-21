@@ -99,7 +99,7 @@ export default function Home() {
           <Card size="md" variant="outlined">
             <CardContent>
               <Typography level="title-md">
-                Welcome Back, {loggedInUser.user.displayName}
+                Welcome Back
               </Typography>
               {/* <Button onClick={addLog}>Log Absence</Button> */}
               <Button onClick={() => setopenAddExpenseModal(true)}>Log Absence</Button>

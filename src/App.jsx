@@ -4,33 +4,19 @@ import Header from './components/header/Header';
 import { ThemeProvider } from './theme/themeContext';
 import { CssVarsProvider } from '@mui/joy/styles';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import axios from "axios";
-import Login from "./Login/Login";
 import UserContext from './service/UserContext';
  
 function App() {
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    axios
-      .get(import.meta.env.VITE_BACKEND_URL + "/auth/user", { withCredentials: true }) 
-      .then((response) => {
-        if (response.data) setUser(response.data);
-      })
-      .catch((err) => {
-        setUser(null);
-        console.error(err);
-      });
-  }, []);
 
   return (
     <div className="App h-screen">
       <UserContext.Provider value={{user}}>
       <CssVarsProvider>
         <ThemeProvider>
-            {user && <Header user={user} setUser={setUser} />}  
+            {<Header/>}  
             <Routes>
-              <Route path="*" element={user ? <Dashboard /> : <Navigate to="/login" />} />
-              <Route path="/login" element={<Login user={user} setUser={setUser} />} />
+              <Route path="*" element={ <Dashboard />} />
             </Routes>
         </ThemeProvider>
       </CssVarsProvider>
