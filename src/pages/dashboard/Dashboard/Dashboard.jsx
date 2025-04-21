@@ -7,9 +7,9 @@ import ExpenseList from "./ExpenseList/ExpenseList";
 import UserContext from "../../../service/UserContext";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
-import AddExpenseModal from "../Home/AddExpense/AddExpense";
+import AddExpenseModal from "./AddExpense/AddExpense";
 
-export default function Home() {
+export default function Dashboard() {
   const [logs, setLogs] = useState([]);
   const [filteredLogs, setFilteredLogs] = useState([]);
   const [availableMonths, setAvailableMonths] = useState([]);
