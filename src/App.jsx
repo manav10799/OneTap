@@ -8,17 +8,15 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import UserContext from "./service/UserContext";
 import SideBar from "./components/header/SideBar/Sidebar";
 import Dashboard from "./pages/dashboard/Dashboard/Dashboard";
 import RecentActivity from "./pages/dashboard/RecentActivity/RecentActivity";
+import { DataProvider } from "./service/DataContext";
 
 function App() {
-  const [user, setUser] = useState(null);
-
   return (
     <div className="App h-screen">
-      <UserContext.Provider value={{ user }}>
+      <DataProvider>
         <CssVarsProvider>
           <ThemeProvider>
             <Header />
@@ -37,7 +35,7 @@ function App() {
             </div>
           </ThemeProvider>
         </CssVarsProvider>
-      </UserContext.Provider>
+      </DataProvider>
     </div>
   );
 }

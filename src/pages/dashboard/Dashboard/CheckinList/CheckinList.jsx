@@ -1,22 +1,23 @@
 import { Card, List, ListItem, Typography } from "@mui/joy";
 import React, { useState } from "react";
-import AddExpenseModal from "../AddExpense/AddExpense";
+import AddLog from "../AddLog/AddLog";
 
-export default function ExpenseList({ logs, fetchLogs }) {
-  const [openAddExpenseModal, setopenAddExpenseModal] = useState(false);
+export default function CheckinList({ logs, fetchLogs, length }) {
+  const [openAddLogModal, setopenAddLogModal] = useState(false);
   const [selectedLog, setSelectedLog] = useState();
 
   const handleSelected = function(log) {
     setSelectedLog(log);
-    setopenAddExpenseModal(true);
+    setopenAddLogModal(true);
   }
   return (
     <>
       <Card>
-        <Typography level="title-md">Last 5 logs</Typography>
+        <Typography level="title-md">{length ? `Last ${length} logs` : 'All Logs'} </Typography>
         <List>
           {logs
             .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .slice(0, length || logs.length)
             .map((log) => {
               return (
                 <div key={log._id}>
@@ -29,13 +30,13 @@ export default function ExpenseList({ logs, fetchLogs }) {
                       ></i>
                     </Typography>
                   </ListItem>
-                  <AddExpenseModal
-                    openAddExpenseModal={openAddExpenseModal}
-                    setopenAddExpenseModal={setopenAddExpenseModal}
+                  <AddLog
+                    openAddLogModal={openAddLogModal}
+                    setopenAddLogModal={setopenAddLogModal}
                     fetchLogs = {fetchLogs}
                     isEditMode={true}
                     currentLog={selectedLog}
-                  ></AddExpenseModal>
+                  ></AddLog>
                 </div>
               );
             })}

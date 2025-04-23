@@ -1,50 +1,40 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Typography from "@mui/joy/Typography";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Button from "@mui/joy/Button";
-import ExpenseList from "./ExpenseList/ExpenseList";
-import UserContext from "../../../service/UserContext";
+import CheckinList from "./CheckinList/CheckinList";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
-import AddExpenseModal from "./AddExpense/AddExpense";
+import AddLog from "./AddLog/AddLog";
+import { useData } from "../../../service/DataContext";
 
 export default function Dashboard() {
-  const [logs, setLogs] = useState([]);
+  const { logs, fetchLogs } = useData();
   const [filteredLogs, setFilteredLogs] = useState([]);
   const [availableMonths, setAvailableMonths] = useState([]);
-  const loggedInUser = useContext(UserContext);
-  const apiUrl = import.meta.env.VITE_BACKEND_URL + "/logs";
-  const [openAddExpenseModal, setopenAddExpenseModal] = useState(false);
+  const [openAddLogModal, setopenAddLogModal] = useState(false);
 
-  const fetchLogs = useCallback(async () => {
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      setLogs(data);
-      setFilteredLogs(data);
-
-      const uniqueMonths = Array.from(
-        new Set(
-          data.map((item) => {
-            const date = new Date(item.date);
-            const monthNumber = date.getMonth();
-            const monthName = date.toLocaleString("default", { month: "long" });
-            return JSON.stringify({ monthNumber, monthName });
-          })
-        )
-      ).map((month) => JSON.parse(month));
-
-      uniqueMonths.push({ monthNumber: 0, monthName: "All" });
-      setAvailableMonths(uniqueMonths);
-    } catch (error) {
-      console.error("Error fetching logs:", error);
-    }
-  }, []);
-
+  // Extract months from logs when logs update
   useEffect(() => {
-    fetchLogs();
-  }, [fetchLogs]);
+    if (!logs.length) return;
+    setFilteredLogs(logs);
+  
+    const uniqueMonths = Array.from(
+      new Set(
+        logs.map((item) => {
+          const date = new Date(item.date);
+          const monthNumber = date.getMonth();
+          const monthName = date.toLocaleString("default", { month: "long" });
+          return JSON.stringify({ monthNumber, monthName });
+        })
+      )
+    ).map((month) => JSON.parse(month));
+  
+    uniqueMonths.push({ monthNumber: 0, monthName: "All" });
+    setAvailableMonths(uniqueMonths);
+  }, [logs]);
+  
 
   const handleMonthFilterChange = (event, selectedMonth) => {
     if (selectedMonth !== 0) {
@@ -98,25 +88,23 @@ export default function Dashboard() {
         <div className="mt-5 md:mt-[20px] md:w-1/2">
           <Card size="md" variant="outlined">
             <CardContent>
-              <Typography level="title-md">
-                Welcome Back
-              </Typography>
-              {/* <Button onClick={addLog}>Log Absence</Button> */}
-              <Button onClick={() => setopenAddExpenseModal(true)}>Log Absence</Button>
+              <Typography level="title-md">Welcome Back</Typography>
+              <Button onClick={() => setopenAddLogModal(true)}>Log Absence</Button>
             </CardContent>
           </Card>
         </div>
 
         <div className="mt-5 md:mt-[20px] md:ml-[20px] md:w-1/2">
-          <ExpenseList logs={filteredLogs} fetchLogs = {fetchLogs} />
+          <CheckinList logs={filteredLogs} fetchLogs={fetchLogs} length = {5} />
         </div>
       </div>
-      <AddExpenseModal
-        openAddExpenseModal={openAddExpenseModal}
-        setopenAddExpenseModal={setopenAddExpenseModal}
+
+      <AddLog
+        openAddLogModal={openAddLogModal}
+        setopenAddLogModal={setopenAddLogModal}
         logs={filteredLogs}
-        fetchLogs = {fetchLogs}
-      ></AddExpenseModal>
+        fetchLogs={fetchLogs}
+      />
     </div>
   );
 }

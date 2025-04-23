@@ -8,9 +8,9 @@ import Box from "@mui/joy/Box";
 import ToggleButtonGroup from '@mui/joy/ToggleButtonGroup';
 import axios from "axios";
 
-export default function AddExpenseModal({
-  openAddExpenseModal,
-  setopenAddExpenseModal,
+export default function AddLog({
+  openAddLogModal,
+  setopenAddLogModal,
   logs,
   fetchLogs,
   isEditMode,
@@ -33,7 +33,7 @@ export default function AddExpenseModal({
         const updatedStatus = `${existingLog.status} and in ${timeLabel}`;
         try {
           await axios.put(`${apiUrl}/${existingLog._id}`, { status: updatedStatus });
-          setopenAddExpenseModal(false);
+          setopenAddLogModal(false);
           fetchLogs();
         } catch (error) {
           console.error("Error updating log:", error);
@@ -46,7 +46,7 @@ export default function AddExpenseModal({
       try {
         await axios.post(apiUrl, { status: newStatus, date: formattedDate, timeoff:timeOffValue  });
         fetchLogs();
-        setopenAddExpenseModal(false);
+        setopenAddLogModal(false);
       } catch (error) {
         console.error("Error creating log:", error);
       }
@@ -58,7 +58,7 @@ export default function AddExpenseModal({
     try {
       await axios.delete(`${apiUrl}/${currentLog._id}`);
       await fetchLogs();
-      setopenAddExpenseModal(false);
+      setopenAddLogModal(false);
     } catch (error) {
       console.error("Error deleting log:", error);
     }
@@ -72,8 +72,8 @@ export default function AddExpenseModal({
         aria-labelledby="modal-title"
         aria-describedby="modal-desc"
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-        open={openAddExpenseModal}
-        onClose={() => setopenAddExpenseModal(false)}
+        open={openAddLogModal}
+        onClose={() => setopenAddLogModal(false)}
       >
         <Sheet
           variant="outlined"

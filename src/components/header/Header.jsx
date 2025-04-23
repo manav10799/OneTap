@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import axios from "axios";
 import themeContext from "../../theme/themeContext";
 import Dropdown from '@mui/joy/Dropdown';
 import Menu from '@mui/joy/Menu';
@@ -39,7 +38,7 @@ export default function Header({user, setUser}) {
           <Menu>
             <MenuItem>Profile</MenuItem>
             <MenuItem>My account</MenuItem>
-            <MenuItem onClick={()=> handleLogout()}>Logout</MenuItem>
+            <MenuItem>Logout</MenuItem>
           </Menu>
         </Dropdown>
       </div>
